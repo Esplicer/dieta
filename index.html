@@ -86,37 +86,26 @@ h2{font-size:1.1rem;margin-bottom:18px}
 .tips-box ul li .tip-icon{flex-shrink:0}
 
 /* SHOPPING */
-.shop-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
-.shop-sum-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
-.shop-sum-card .ss-val{font-size:1.2rem;font-weight:700}
-.shop-sum-card .ss-lbl{font-size:0.72rem;color:var(--muted);margin-top:2px}
-.shop-sum-card.highlight{border-color:var(--green)}
-.shop-sum-card.highlight .ss-val{color:var(--green)}
-.shop-freq-tabs{display:flex;gap:7px;margin-bottom:18px;flex-wrap:wrap}
-.shop-freq-tab{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:0.82rem;color:var(--muted);transition:all .15s}
-.shop-freq-tab.active{color:#fff;font-weight:600}
-.shop-freq-tab[data-freq="weekly"].active{background:#1a4a6a;border-color:var(--accent);color:var(--accent)}
-.shop-freq-tab[data-freq="biweekly"].active{background:#3a2e10;border-color:var(--yellow);color:var(--yellow)}
-.shop-freq-tab[data-freq="monthly"].active{background:#1a3a2a;border-color:var(--green);color:var(--green)}
-.shop-freq-panel{display:none}
-.shop-freq-panel.active{display:block}
-.shop-freq-desc{font-size:0.8rem;color:var(--muted);margin-bottom:14px;padding:8px 12px;background:var(--card2);border-radius:8px}
+.shop-topbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.shop-cost-badge{background:var(--card);border:1px solid var(--green);border-radius:10px;padding:8px 16px;font-size:0.88rem;margin-left:auto}
+.shop-cost-badge strong{color:var(--green);font-size:1.1rem}
+.shop-week-tabs{display:flex;gap:8px;margin-bottom:18px}
+.shop-week-tab{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 16px;cursor:pointer;font-size:0.83rem;color:var(--muted);transition:all .15s}
+.shop-week-tab.active{background:var(--yellow);border-color:var(--yellow);color:#111;font-weight:700}
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
 .shop-cat{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:16px}
 .shop-cat h3{font-size:0.83rem;text-transform:uppercase;letter-spacing:.06em;color:var(--yellow);margin-bottom:12px}
 .shop-item{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--border)}
 .shop-item:last-child{border:none}
-.shop-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex-shrink:0;margin-top:2px}
+.shop-item input[type=checkbox]{width:17px;height:17px;accent-color:var(--accent);cursor:pointer;flex-shrink:0;margin-top:2px}
 .shop-item-info{flex:1;min-width:0}
-.shop-item-name{font-size:0.86rem;cursor:pointer;display:block}
+.shop-item-name{font-size:0.87rem;cursor:pointer;display:block;line-height:1.3}
 .shop-item-name.done{text-decoration:line-through;color:var(--muted)}
-.shop-item-tip{font-size:0.73rem;color:var(--green);margin-top:1px}
-.shop-item-right{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:1px}
-.shop-qty{font-size:0.73rem;color:var(--accent);font-weight:600}
-.shop-price{font-size:0.8rem;color:var(--text);font-weight:700}
-.shop-week-equiv{font-size:0.7rem;color:var(--muted)}
-.shop-col-header{display:flex;justify-content:space-between;padding:0 0 6px;border-bottom:1px solid var(--border);margin-bottom:4px}
-.shop-col-header span{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.shop-item-sub{font-size:0.72rem;color:var(--muted);margin-top:2px}
+.shop-item-sub.reponer{color:#5a6a4a;font-style:italic}
+.shop-item-right{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;gap:2px;min-width:52px}
+.shop-qty{font-size:0.73rem;color:var(--accent);font-weight:600;text-align:right}
+.shop-price{font-size:0.82rem;color:var(--text);font-weight:700}
 .save-tips{background:var(--card2);border:1px solid var(--green);border-radius:10px;padding:14px 16px;margin-top:18px}
 .save-tips h4{color:var(--green);font-size:0.85rem;margin-bottom:10px}
 .save-tips ul{list-style:none;display:flex;flex-direction:column;gap:7px}
@@ -207,51 +196,29 @@ h2{font-size:1.1rem;margin-bottom:18px}
 <div id="compra" class="section">
   <h2>Lista de la compra — Mercadona</h2>
 
-  <div class="shop-summary">
-    <div class="shop-sum-card highlight">
-      <div class="ss-val" id="shop-weekly-real">~62€</div>
-      <div class="ss-lbl">Coste real semanal</div>
-    </div>
-    <div class="shop-sum-card">
-      <div class="ss-val" style="color:var(--accent)" id="shop-weekly-full">~57€</div>
-      <div class="ss-lbl">Solo perecederos (cada semana)</div>
-    </div>
-    <div class="shop-sum-card">
-      <div class="ss-val" style="color:var(--yellow)">~248€</div>
-      <div class="ss-lbl">Coste mensual estimado</div>
-    </div>
-    <div class="shop-sum-card">
-      <div class="ss-val" style="color:var(--muted)">~15€</div>
-      <div class="ss-lbl">Ahorro posible (ver consejos)</div>
-    </div>
-  </div>
-
-  <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
-    <button onclick="checkAllShopFreq()" style="background:var(--accent);border:none;color:#fff;padding:7px 15px;border-radius:8px;cursor:pointer;font-size:0.85rem">✓ Marcar todo</button>
+  <div class="shop-topbar">
+    <button onclick="checkAllShop()" style="background:var(--accent);border:none;color:#fff;padding:7px 15px;border-radius:8px;cursor:pointer;font-size:0.85rem">✓ Marcar todo</button>
     <button onclick="uncheckAllShop()" style="background:var(--card);border:1px solid var(--border);color:var(--text);padding:7px 15px;border-radius:8px;cursor:pointer;font-size:0.85rem">Desmarcar todo</button>
+    <div class="shop-cost-badge">Total semana: <strong id="shop-total-label">—</strong></div>
   </div>
 
-  <div class="shop-freq-tabs">
-    <div class="shop-freq-tab active" data-freq="weekly" onclick="selectShopFreq('weekly',this)">🛒 Cada semana</div>
-    <div class="shop-freq-tab" data-freq="biweekly" onclick="selectShopFreq('biweekly',this)">📦 Cada 2 semanas</div>
-    <div class="shop-freq-tab" data-freq="monthly" onclick="selectShopFreq('monthly',this)">🗄️ Cada mes</div>
+  <div class="shop-week-tabs">
+    <div class="shop-week-tab active" onclick="selectShopWeek('A',this)">Semana A (Meses 1–2)</div>
+    <div class="shop-week-tab" onclick="selectShopWeek('B',this)">Semana B (Meses 3–4)</div>
   </div>
 
-  <div id="shop-panel-weekly" class="shop-freq-panel active"></div>
-  <div id="shop-panel-biweekly" class="shop-freq-panel"></div>
-  <div id="shop-panel-monthly" class="shop-freq-panel"></div>
+  <div id="shop-list"></div>
 
   <div class="save-tips">
-    <h4>💡 Consejos para abaratar la compra (~15€ menos/semana)</h4>
+    <h4>💡 Consejos para abaratar (~10–15€ menos/semana)</h4>
     <ul>
-      <li><span>🐔</span><span><strong>Pollo congelado en vez de fresco:</strong> pechuga congelada Hacendado ~5,50€/kg vs 7,50€/kg fresca. Con 2,5 kg ahorras ~5€/semana. Descongela la noche anterior.</span></li>
-      <li><span>🥛</span><span><strong>Reduce a 10 yogures:</strong> la dieta real solo necesita 10 (contados). Los días de merienda "2 yogures" puedes sustituir 1 por queso fresco batido (1,55€/500g vs 1,25€/yogur). Ahorro: ~2,50€.</span></li>
-      <li><span>🐟</span><span><strong>Merluza en bloque entera:</strong> la merluza en filetes pequeños es más cara. Si compras la cola/rodaja de merluza Hacendado sale más barata por kg.</span></li>
-      <li><span>🥚</span><span><strong>Huevos S o M en vez de L:</strong> igual de nutritivos, más baratos. El pack de 18 M Hacendado ~1,99€ es buena opción (necesitas ~24–28/semana).</span></li>
-      <li><span>🛒</span><span><strong>Compra el lunes:</strong> Mercadona suele tener más stock y mejor calidad en proteínas al inicio de semana.</span></li>
+      <li><span>🐔</span><span><strong>Pollo congelado en vez de fresco:</strong> pechuga congelada Hacendado ~5,50€/kg vs 7,50€ fresca. Ahorro ~5€. Descongela la noche anterior.</span></li>
+      <li><span>🥛</span><span><strong>10 yogures son suficientes</strong> (contados en la dieta). Los días con "2 yogures" sustituye 1 por queso fresco batido. Ahorro ~2,50€.</span></li>
+      <li><span>🐟</span><span><strong>Merluza en cola/rodaja</strong> en vez de filetes pequeños: más barata por kg en Mercadona.</span></li>
+      <li><span>🥚</span><span><strong>Huevos M</strong> en vez de L: igual de nutritivos. Pack 18 M Hacendado ~1,99€.</span></li>
     </ul>
   </div>
-  <p style="font-size:0.75rem;color:var(--muted);margin-top:12px">* Precios orientativos Mercadona 2025. Pueden variar ligeramente según tienda.</p>
+  <p style="font-size:0.75rem;color:var(--muted);margin-top:12px">* Precios orientativos Mercadona 2025. Items marcados con <em>"reponer si falta"</em> duran varias semanas.</p>
 </div>
 
 <!-- ====== PLAN MENSUAL ====== -->
@@ -532,67 +499,82 @@ const WEEKS = {
 // ═══════════════════════════════════════════════
 // SHOPPING DATA — [id, categoria, nombre, qty, precio, duración_semanas]
 // ═══════════════════════════════════════════════
-// freq: weekly=cada semana, biweekly=cada 2 semanas, monthly=cada mes
-// weeklyEquiv: precio amortizado por semana
+// reponer:true = no hace falta comprar cada semana, solo cuando se acabe
 const SHOP_DATA = {
-  weekly: {
-    desc: '🛒 Perecederos — compra esto cada semana en Mercadona',
-    cats: [
-      { cat:'🥩 Proteína fresca', items:[
-        { id:'s1', name:'Pechuga pollo fresca Hacendado', qty:'2,5 kg (5 band.)', price:17.50, weeklyEquiv:17.50, tip:'💡 Congelada: ahorra ~4€' },
-        { id:'s5', name:'Huevos M Hacendado', qty:'24 uds (2 docenas)', price:3.98, weeklyEquiv:3.98 },
-      ]},
-      { cat:'🥫 Conservas y fiambres', items:[
-        { id:'s6', name:'Atún claro natural Hacendado', qty:'10 latas (3–4 packs)', price:4.50, weeklyEquiv:4.50 },
-        { id:'s7', name:'Jamón serrano Hacendado sobre', qty:'300 g (3 sobres 100g)', price:6.15, weeklyEquiv:6.15 },
-        { id:'s8', name:'Jamón cocido extra Hacendado', qty:'150 g', price:1.35, weeklyEquiv:1.35 },
-      ]},
-      { cat:'🥛 Lácteos', items:[
-        { id:'s9', name:'Yogur proteico 0% Hacendado', qty:'10 uds', price:12.50, weeklyEquiv:12.50, tip:'💡 Sustituye 2 por queso batido: −2,50€' },
-        { id:'s10', name:'Queso fresco batido 0% Hacendado', qty:'500 g', price:1.55, weeklyEquiv:1.55 },
-      ]},
-      { cat:'🥦 Fruta y verdura fresca', items:[
-        { id:'s15', name:'Lechuga iceberg', qty:'1 pieza', price:0.99, weeklyEquiv:0.99 },
-        { id:'s16', name:'Tomates rama', qty:'500 g', price:1.49, weeklyEquiv:1.49 },
-        { id:'s18', name:'Plátanos', qty:'malla 1 kg', price:1.59, weeklyEquiv:1.59 },
-        { id:'s19', name:'Fresas Hacendado', qty:'500 g', price:1.99, weeklyEquiv:1.99 },
-        { id:'s20', name:'Naranjas / Mandarinas', qty:'malla 1 kg', price:1.29, weeklyEquiv:1.29 },
-        { id:'s20b', name:'Cerezas (temporada)', qty:'300 g', price:1.50, weeklyEquiv:1.50 },
-      ]},
-      { cat:'🍞 Pan', items:[
-        { id:'s13', name:'Pan integral molde Hacendado', qty:'500 g', price:1.35, weeklyEquiv:1.35 },
-      ]},
-    ]
-  },
-  biweekly: {
-    desc: '📦 Duran ~2 semanas — compra cuando se acaben, no hace falta ir cada semana',
-    cats: [
-      { cat:'🥩 Proteína congelada', items:[
-        { id:'s2', name:'Pavo filete Hacendado', qty:'1 kg', price:8.58, weeklyEquiv:4.29 },
-        { id:'s3', name:'Carne picada vacuno magra 5%', qty:'400 g', price:3.29, weeklyEquiv:1.65 },
-        { id:'s4', name:'Merluza filetes congelada Hacendado', qty:'800 g', price:5.58, weeklyEquiv:2.79 },
-      ]},
-      { cat:'🌾 Carbohidratos', items:[
-        { id:'s12', name:'Patatas bolsa', qty:'2 kg', price:1.39, weeklyEquiv:1.00 },
-        { id:'s17', name:'Verduras congeladas mix Hacendado', qty:'750 g', price:1.45, weeklyEquiv:0.73 },
-      ]},
-      { cat:'🥫 Conservas extra', items:[
-        { id:'s22', name:'Tomate triturado brick Hacendado', qty:'2 x 400g', price:1.30, weeklyEquiv:0.65 },
-      ]},
-    ]
-  },
-  monthly: {
-    desc: '🗄️ Despensa — compra una vez al mes, duran 3–4 semanas',
-    cats: [
-      { cat:'🌾 Secos', items:[
-        { id:'s11', name:'Arroz largo Hacendado', qty:'1 kg', price:0.99, weeklyEquiv:0.25 },
-        { id:'s14', name:'Copos avena Hacendado', qty:'500 g', price:1.25, weeklyEquiv:0.32 },
-      ]},
-      { cat:'🫙 Cocina', items:[
-        { id:'s21', name:'Aceite oliva virgen extra Hacendado', qty:'750 ml', price:4.99, weeklyEquiv:1.25 },
-      ]},
-    ]
-  }
+  A: [
+    { cat:'🥩 Proteína', items:[
+      { id:'sA1', name:'Pechuga pollo fresca Hacendado', qty:'2,5 kg', price:17.50 },
+      { id:'sA2', name:'Pavo filete Hacendado', qty:'500 g', price:4.29, reponer:true },
+      { id:'sA3', name:'Carne picada vacuno magra 5%', qty:'250 g', price:1.65, reponer:true },
+      { id:'sA4', name:'Merluza filetes congelada Hacendado', qty:'500 g', price:3.49, reponer:true },
+      { id:'sA5', name:'Huevos M Hacendado', qty:'24 uds (2 docenas)', price:3.98 },
+    ]},
+    { cat:'🥫 Conservas y fiambres', items:[
+      { id:'sA6', name:'Atún claro natural Hacendado', qty:'10 latas', price:4.50 },
+      { id:'sA7', name:'Jamón serrano Hacendado (sobres 100g)', qty:'3 sobres → 300 g', price:6.15 },
+      { id:'sA8', name:'Jamón cocido extra Hacendado', qty:'150 g', price:1.35 },
+    ]},
+    { cat:'🥛 Lácteos', items:[
+      { id:'sA9', name:'Yogur proteico 0% Hacendado', qty:'10 uds', price:12.50 },
+      { id:'sA10', name:'Queso fresco batido 0% Hacendado', qty:'500 g', price:1.55 },
+    ]},
+    { cat:'🌾 Carbohidratos', items:[
+      { id:'sA11', name:'Patatas bolsa', qty:'2 kg', price:1.39 },
+      { id:'sA12', name:'Pan integral molde Hacendado', qty:'500 g', price:1.35 },
+      { id:'sA13', name:'Arroz largo Hacendado', qty:'1 kg', price:0.99, reponer:true },
+      { id:'sA14', name:'Copos de avena Hacendado', qty:'500 g', price:1.25, reponer:true },
+    ]},
+    { cat:'🥦 Verdura y fruta', items:[
+      { id:'sA15', name:'Lechuga iceberg', qty:'1 pieza', price:0.99 },
+      { id:'sA16', name:'Tomates rama', qty:'500 g', price:1.49 },
+      { id:'sA17', name:'Verduras congeladas mix Hacendado', qty:'750 g', price:1.45, reponer:true },
+      { id:'sA18', name:'Plátanos', qty:'malla 1 kg', price:1.59 },
+      { id:'sA19', name:'Fresas', qty:'500 g', price:1.99 },
+      { id:'sA20', name:'Naranjas / Mandarinas', qty:'malla 1 kg', price:1.29 },
+      { id:'sA21', name:'Cerezas (temporada)', qty:'300 g', price:1.50 },
+    ]},
+    { cat:'🫙 Básicos de cocina', items:[
+      { id:'sA22', name:'Aceite oliva virgen extra Hacendado', qty:'750 ml', price:4.99, reponer:true },
+      { id:'sA23', name:'Tomate triturado brick Hacendado', qty:'2 × 400 g', price:1.30, reponer:true },
+    ]},
+  ],
+  B: [
+    { cat:'🥩 Proteína', items:[
+      { id:'sB1', name:'Pechuga pollo fresca Hacendado', qty:'2,5 kg', price:17.50 },
+      { id:'sB2', name:'Pavo filete Hacendado', qty:'500 g', price:4.29 },
+      { id:'sB3', name:'Carne picada vacuno magra 5%', qty:'400 g', price:3.29 },
+      { id:'sB4', name:'Merluza filetes congelada Hacendado', qty:'500 g', price:3.49 },
+      { id:'sB5', name:'Huevos M Hacendado', qty:'24 uds (2 docenas)', price:3.98 },
+    ]},
+    { cat:'🥫 Conservas y fiambres', items:[
+      { id:'sB6', name:'Atún claro natural Hacendado', qty:'10 latas', price:4.50 },
+      { id:'sB7', name:'Jamón serrano Hacendado (sobres 100g)', qty:'3 sobres → 300 g', price:6.15 },
+      { id:'sB8', name:'Jamón cocido extra Hacendado', qty:'150 g', price:1.35 },
+    ]},
+    { cat:'🥛 Lácteos', items:[
+      { id:'sB9', name:'Yogur proteico 0% Hacendado', qty:'10 uds', price:12.50 },
+      { id:'sB10', name:'Queso fresco batido 0% Hacendado', qty:'750 g (× 1,5)', price:2.33 },
+    ]},
+    { cat:'🌾 Carbohidratos', items:[
+      { id:'sB11', name:'Patatas bolsa', qty:'2 kg', price:1.39 },
+      { id:'sB12', name:'Pan integral molde Hacendado', qty:'500 g', price:1.35 },
+      { id:'sB13', name:'Arroz largo Hacendado', qty:'1 kg', price:0.99, reponer:true },
+      { id:'sB14', name:'Copos de avena Hacendado', qty:'500 g', price:1.25, reponer:true },
+    ]},
+    { cat:'🥦 Verdura y fruta', items:[
+      { id:'sB15', name:'Lechuga iceberg', qty:'1 pieza', price:0.99 },
+      { id:'sB16', name:'Tomates rama', qty:'500 g', price:1.49 },
+      { id:'sB17', name:'Verduras congeladas mix Hacendado', qty:'750 g', price:1.45, reponer:true },
+      { id:'sB18', name:'Plátanos', qty:'malla 1 kg', price:1.59 },
+      { id:'sB19', name:'Fresas', qty:'500 g', price:1.99 },
+      { id:'sB20', name:'Naranjas / Mandarinas', qty:'malla 1 kg', price:1.29 },
+      { id:'sB21', name:'Cerezas (temporada)', qty:'300 g', price:1.50 },
+    ]},
+    { cat:'🫙 Básicos de cocina', items:[
+      { id:'sB22', name:'Aceite oliva virgen extra Hacendado', qty:'750 ml', price:4.99, reponer:true },
+      { id:'sB23', name:'Tomate triturado brick Hacendado', qty:'2 × 400 g', price:1.30, reponer:true },
+    ]},
+  ]
 };
 
 const MONTH_PLAN = [
@@ -725,95 +707,72 @@ function updateDayTotal() {
 // ═══════════════════════════════════════════════
 // RENDER — COMPRA
 // ═══════════════════════════════════════════════
-let currentShopFreq = 'weekly';
+let currentShopWeek = 'A';
 
 function allShopItems() {
-  return Object.values(SHOP_DATA).flatMap(f => f.cats.flatMap(c => c.items));
+  return [...SHOP_DATA.A, ...SHOP_DATA.B].flatMap(c => c.items);
+}
+
+function currentShopItems() {
+  return SHOP_DATA[currentShopWeek].flatMap(c => c.items);
 }
 
 function renderShop() {
-  ['weekly','biweekly','monthly'].forEach(freq => {
-    const panel = document.getElementById('shop-panel-'+freq);
-    const data = SHOP_DATA[freq];
-    const grid = `<div class="shop-freq-desc">${data.desc}</div><div class="shop-grid">${
-      data.cats.map(cat => {
-        const items = cat.items.map(item => {
-          const checked = !!shopChecked[item.id];
-          const tipHtml = item.tip ? `<div class="shop-item-tip">${item.tip}</div>` : '';
-          const weeklyLine = freq !== 'weekly'
-            ? `<div class="shop-week-equiv">≈ ${item.weeklyEquiv.toFixed(2)}€/sem</div>` : '';
-          return `<div class="shop-item">
-            <input type="checkbox" id="${item.id}" ${checked?'checked':''} onchange="toggleShop('${item.id}',this)">
-            <div class="shop-item-info">
-              <span class="shop-item-name${checked?' done':''}" onclick="document.getElementById('${item.id}').click()">${item.name}</span>
-              ${tipHtml}
-            </div>
-            <div class="shop-item-right">
-              <span class="shop-qty">${item.qty}</span>
-              <span class="shop-price">${item.price.toFixed(2)}€</span>
-              ${weeklyLine}
-            </div>
-          </div>`;
-        }).join('');
-        return `<div class="shop-cat"><h3>${cat.cat}</h3>${items}</div>`;
-      }).join('')
-    }</div>`;
-    panel.innerHTML = grid;
-  });
-  updateShopTotal();
+  const cats = SHOP_DATA[currentShopWeek];
+  const total = cats.flatMap(c=>c.items).reduce((a,i)=>a+i.price,0);
+  document.getElementById('shop-total-label').textContent = `~${total.toFixed(0)}€`;
+
+  document.getElementById('shop-list').innerHTML = `<div class="shop-grid">${
+    cats.map(cat => {
+      const items = cat.items.map(item => {
+        const checked = !!shopChecked[item.id];
+        const subHtml = item.reponer
+          ? `<div class="shop-item-sub reponer">reponer solo si se te acabó</div>`
+          : '';
+        return `<div class="shop-item">
+          <input type="checkbox" id="${item.id}" ${checked?'checked':''} onchange="toggleShop('${item.id}',this)">
+          <div class="shop-item-info">
+            <span class="shop-item-name${checked?' done':''}" onclick="document.getElementById('${item.id}').click()">${item.name}</span>
+            ${subHtml}
+          </div>
+          <div class="shop-item-right">
+            <span class="shop-qty">${item.qty}</span>
+            <span class="shop-price">${item.price.toFixed(2)}€</span>
+          </div>
+        </div>`;
+      }).join('');
+      return `<div class="shop-cat"><h3>${cat.cat}</h3>${items}</div>`;
+    }).join('')
+  }</div>`;
 }
 
-function selectShopFreq(freq, el) {
-  currentShopFreq = freq;
-  document.querySelectorAll('.shop-freq-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.shop-freq-panel').forEach(p=>p.classList.remove('active'));
+function selectShopWeek(w, el) {
+  currentShopWeek = w;
+  document.querySelectorAll('.shop-week-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('shop-panel-'+freq).classList.add('active');
+  renderShop();
 }
 
 function toggleShop(id, cb) {
   shopChecked[id] = cb.checked;
-  // update name span
   const nameEl = cb.closest('.shop-item')?.querySelector('.shop-item-name');
   if(nameEl) nameEl.classList.toggle('done', cb.checked);
   saveState();
-  updateShopTotal();
 }
 
-function updateShopTotal() {
-  const allItems = allShopItems();
-  const weeklyItems = SHOP_DATA.weekly.cats.flatMap(c=>c.items);
-  // weekly cost = sum of unchecked weekly items
-  const weeklyUnchecked = weeklyItems.reduce((a,i)=> a + (shopChecked[i.id]?0:i.price), 0);
-  // real weekly = weekly + amortized portions of biweekly/monthly
-  const biweeklyEquiv = SHOP_DATA.biweekly.cats.flatMap(c=>c.items).reduce((a,i)=>a+i.weeklyEquiv,0);
-  const monthlyEquiv = SHOP_DATA.monthly.cats.flatMap(c=>c.items).reduce((a,i)=>a+i.weeklyEquiv,0);
-  const realWeekly = weeklyItems.reduce((a,i)=>a+i.price,0) + biweeklyEquiv + monthlyEquiv;
-  document.getElementById('shop-weekly-real').textContent = `~${Math.round(realWeekly)}€`;
-  document.getElementById('shop-weekly-full').textContent = `~${Math.round(weeklyItems.reduce((a,i)=>a+i.price,0))}€`;
-}
-
-function checkAllShopFreq() {
-  allShopItems().forEach(item=>{
+function checkAllShop() {
+  currentShopItems().forEach(item=>{
     shopChecked[item.id]=true;
     const cb=document.getElementById(item.id);
-    if(cb){
-      cb.checked=true;
-      const n=cb.closest('.shop-item')?.querySelector('.shop-item-name');
-      if(n)n.classList.add('done');
-    }
+    if(cb){cb.checked=true;cb.closest('.shop-item')?.querySelector('.shop-item-name')?.classList.add('done');}
   });
   saveState();
 }
 function uncheckAllShop() {
-  allShopItems().forEach(item=>{
+  currentShopItems().forEach(item=>{
     shopChecked[item.id]=false;
     const cb=document.getElementById(item.id);
-    if(cb){
-      cb.checked=false;
-      const n=cb.closest('.shop-item')?.querySelector('.shop-item-name');
-      if(n)n.classList.remove('done');
-    }
+    if(cb){cb.checked=false;cb.closest('.shop-item')?.querySelector('.shop-item-name')?.classList.remove('done');}
   });
   saveState();
 }
