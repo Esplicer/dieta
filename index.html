@@ -527,82 +527,51 @@ const WEEKS = {
 // SHOPPING DATA — [id, categoria, nombre, qty, precio, duración_semanas]
 // ═══════════════════════════════════════════════
 // reponer:true = no hace falta comprar cada semana, solo cuando se acabe
-const SHOP_DATA = {
-  A: [
-    { cat:'🥩 Proteína', items:[
-      { id:'sA1', name:'Pechuga pollo fresca Hacendado', qty:'2,5 kg', price:17.50 },
-      { id:'sA2', name:'Pavo filete Hacendado', qty:'500 g', price:4.29, reponer:true },
-      { id:'sA3', name:'Carne picada vacuno magra 5%', qty:'250 g', price:1.65, reponer:true },
-      { id:'sA4', name:'Merluza filetes congelada Hacendado', qty:'500 g', price:3.49, reponer:true },
-      { id:'sA5', name:'Huevos M Hacendado', qty:'24 uds (2 docenas)', price:3.98 },
-    ]},
-    { cat:'🥫 Conservas y fiambres', items:[
-      { id:'sA6', name:'Atún claro natural Hacendado', qty:'10 latas', price:4.50 },
-      { id:'sA7', name:'Jamón serrano Hacendado (sobres 100g)', qty:'3 sobres → 300 g', price:6.15 },
-      { id:'sA8', name:'Jamón cocido extra Hacendado', qty:'150 g', price:1.35 },
-    ]},
-    { cat:'🥛 Lácteos', items:[
-      { id:'sA9', name:'Yogur proteico 0% Hacendado', qty:'10 uds', price:12.50 },
-      { id:'sA10', name:'Queso fresco batido 0% Hacendado', qty:'500 g', price:1.55 },
-    ]},
-    { cat:'🌾 Carbohidratos', items:[
-      { id:'sA11', name:'Patatas bolsa', qty:'2 kg', price:1.39 },
-      { id:'sA12', name:'Pan integral molde Hacendado', qty:'500 g', price:1.35 },
-      { id:'sA13', name:'Arroz largo Hacendado', qty:'1 kg', price:0.99, reponer:true },
-      { id:'sA14', name:'Copos de avena Hacendado', qty:'500 g', price:1.25, reponer:true },
-    ]},
-    { cat:'🥦 Verdura y fruta', items:[
-      { id:'sA15', name:'Lechuga iceberg', qty:'1 pieza', price:0.99 },
-      { id:'sA16', name:'Tomates rama', qty:'500 g', price:1.49 },
-      { id:'sA17', name:'Verduras congeladas mix Hacendado', qty:'750 g', price:1.45, reponer:true },
-      { id:'sA18', name:'Plátanos', qty:'malla 1 kg', price:1.59 },
-      { id:'sA19', name:'Fresas', qty:'500 g', price:1.99 },
-      { id:'sA20', name:'Naranjas / Mandarinas', qty:'malla 1 kg', price:1.29 },
-      { id:'sA21', name:'Cerezas (temporada)', qty:'300 g', price:1.50 },
-    ]},
-    { cat:'🫙 Básicos de cocina', items:[
-      { id:'sA22', name:'Aceite oliva virgen extra Hacendado', qty:'750 ml', price:4.99, reponer:true },
-      { id:'sA23', name:'Tomate triturado brick Hacendado', qty:'2 × 400 g', price:1.30, reponer:true },
-    ]},
-  ],
-  B: [
-    { cat:'🥩 Proteína', items:[
-      { id:'sB1', name:'Pechuga pollo fresca Hacendado', qty:'2,5 kg', price:17.50 },
-      { id:'sB2', name:'Pavo filete Hacendado', qty:'500 g', price:4.29 },
-      { id:'sB3', name:'Carne picada vacuno magra 5%', qty:'400 g', price:3.29 },
-      { id:'sB4', name:'Merluza filetes congelada Hacendado', qty:'500 g', price:3.49 },
-      { id:'sB5', name:'Huevos M Hacendado', qty:'24 uds (2 docenas)', price:3.98 },
-    ]},
-    { cat:'🥫 Conservas y fiambres', items:[
-      { id:'sB6', name:'Atún claro natural Hacendado', qty:'10 latas', price:4.50 },
-      { id:'sB7', name:'Jamón serrano Hacendado (sobres 100g)', qty:'3 sobres → 300 g', price:6.15 },
-      { id:'sB8', name:'Jamón cocido extra Hacendado', qty:'150 g', price:1.35 },
-    ]},
-    { cat:'🥛 Lácteos', items:[
-      { id:'sB9', name:'Yogur proteico 0% Hacendado', qty:'10 uds', price:12.50 },
-      { id:'sB10', name:'Queso fresco batido 0% Hacendado', qty:'750 g (× 1,5)', price:2.33 },
-    ]},
-    { cat:'🌾 Carbohidratos', items:[
-      { id:'sB11', name:'Patatas bolsa', qty:'2 kg', price:1.39 },
-      { id:'sB12', name:'Pan integral molde Hacendado', qty:'500 g', price:1.35 },
-      { id:'sB13', name:'Arroz largo Hacendado', qty:'1 kg', price:0.99, reponer:true },
-      { id:'sB14', name:'Copos de avena Hacendado', qty:'500 g', price:1.25, reponer:true },
-    ]},
-    { cat:'🥦 Verdura y fruta', items:[
-      { id:'sB15', name:'Lechuga iceberg', qty:'1 pieza', price:0.99 },
-      { id:'sB16', name:'Tomates rama', qty:'500 g', price:1.49 },
-      { id:'sB17', name:'Verduras congeladas mix Hacendado', qty:'750 g', price:1.45, reponer:true },
-      { id:'sB18', name:'Plátanos', qty:'malla 1 kg', price:1.59 },
-      { id:'sB19', name:'Fresas', qty:'500 g', price:1.99 },
-      { id:'sB20', name:'Naranjas / Mandarinas', qty:'malla 1 kg', price:1.29 },
-      { id:'sB21', name:'Cerezas (temporada)', qty:'300 g', price:1.50 },
-    ]},
-    { cat:'🫙 Básicos de cocina', items:[
-      { id:'sB22', name:'Aceite oliva virgen extra Hacendado', qty:'750 ml', price:4.99, reponer:true },
-      { id:'sB23', name:'Tomate triturado brick Hacendado', qty:'2 × 400 g', price:1.30, reponer:true },
-    ]},
-  ]
-};
+// reponer:true → no comprar cada semana, solo cuando se acabe
+const SHOP_SEMANAL = [
+  { cat:'🥩 Proteína', items:[
+    { id:'s1', name:'Pechuga pollo fresca Hacendado', qty:'2,5 kg', price:17.50 },
+    { id:'s2', name:'Pavo filete Hacendado', qty:'500 g', price:4.29 },
+    { id:'s3', name:'Merluza filetes congelada Hacendado', qty:'500 g', price:3.49 },
+    { id:'s4', name:'Carne picada vacuno magra 5%', qty:'400 g', price:3.29 },
+    { id:'s5', name:'Huevos M Hacendado', qty:'24 uds (2 docenas)', price:3.98 },
+  ]},
+  { cat:'🥫 Conservas y fiambres', items:[
+    { id:'s6', name:'Atún claro natural Hacendado', qty:'10 latas', price:4.50 },
+    { id:'s7', name:'Jamón serrano Hacendado (sobres)', qty:'3 sobres × 100 g', price:6.15 },
+    { id:'s8', name:'Jamón cocido extra Hacendado', qty:'150 g', price:1.35 },
+  ]},
+  { cat:'🥛 Lácteos', items:[
+    { id:'s9', name:'Yogur proteico 0% Hacendado', qty:'10 uds', price:12.50 },
+    { id:'s10', name:'Queso fresco batido 0% Hacendado', qty:'500 g', price:1.55 },
+  ]},
+  { cat:'🌾 Carbohidratos', items:[
+    { id:'s11', name:'Patatas bolsa', qty:'2 kg', price:1.39 },
+    { id:'s12', name:'Pan integral molde Hacendado', qty:'500 g', price:1.35 },
+  ]},
+  { cat:'🥦 Verdura y fruta', items:[
+    { id:'s13', name:'Lechuga iceberg', qty:'1 pieza', price:0.99 },
+    { id:'s14', name:'Tomates rama', qty:'500 g', price:1.49 },
+    { id:'s15', name:'Plátanos', qty:'malla 1 kg', price:1.59 },
+    { id:'s16', name:'Fresas', qty:'500 g', price:1.99 },
+    { id:'s17', name:'Naranjas / Mandarinas', qty:'malla 1 kg', price:1.29 },
+    { id:'s18', name:'Cerezas (temporada)', qty:'300 g', price:1.50 },
+  ]},
+];
+
+const SHOP_REPONER = [
+  { cat:'🌾 Secos (duran 3–4 semanas)', items:[
+    { id:'r1', name:'Arroz largo Hacendado', qty:'1 kg', price:0.99 },
+    { id:'r2', name:'Copos de avena Hacendado', qty:'500 g', price:1.25 },
+  ]},
+  { cat:'🥦 Congelados (duran 2–3 semanas)', items:[
+    { id:'r3', name:'Verduras congeladas mix Hacendado', qty:'750 g', price:1.45 },
+  ]},
+  { cat:'🫙 Despensa (duran 1–2 meses)', items:[
+    { id:'r4', name:'Aceite oliva virgen extra Hacendado', qty:'750 ml', price:4.99 },
+    { id:'r5', name:'Tomate triturado brick Hacendado', qty:'2 × 400 g', price:1.30 },
+  ]},
+];
 
 const MONTH_PLAN = [
   { num:1, weeks:'Semana A · 4 veces', kcal:'2200–2300', inicio:'105,7 kg', fin:'100–101 kg', perdida:'−5 kg', badge:'red',
@@ -734,50 +703,42 @@ function updateDayTotal() {
 // ═══════════════════════════════════════════════
 // RENDER — COMPRA
 // ═══════════════════════════════════════════════
-let currentShopWeek = 'A';
-
 function allShopItems() {
-  return [...SHOP_DATA.A, ...SHOP_DATA.B].flatMap(c => c.items);
+  return [...SHOP_SEMANAL, ...SHOP_REPONER].flatMap(c => c.items);
 }
 
-function currentShopItems() {
-  return SHOP_DATA[currentShopWeek].flatMap(c => c.items);
+function buildShopGrid(cats) {
+  return `<div class="shop-grid">${cats.map(cat => {
+    const items = cat.items.map(item => {
+      const checked = !!shopChecked[item.id];
+      return `<div class="shop-item">
+        <input type="checkbox" id="${item.id}" ${checked?'checked':''} onchange="toggleShop('${item.id}',this)">
+        <span class="shop-item-name${checked?' done':''}" onclick="document.getElementById('${item.id}').click()">${item.name}</span>
+        <div class="shop-item-right">
+          <span class="shop-qty">${item.qty}</span>
+          <span class="shop-price">${item.price.toFixed(2)}€</span>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="shop-cat"><h3>${cat.cat}</h3>${items}</div>`;
+  }).join('')}</div>`;
 }
 
 function renderShop() {
-  const cats = SHOP_DATA[currentShopWeek];
-  const total = cats.flatMap(c=>c.items).reduce((a,i)=>a+i.price,0);
-  document.getElementById('shop-total-label').textContent = `~${total.toFixed(0)}€`;
+  const total = SHOP_SEMANAL.flatMap(c=>c.items).reduce((a,i)=>a+i.price,0);
+  document.getElementById('shop-total-label').textContent = `~${Math.round(total)}€`;
 
-  document.getElementById('shop-list').innerHTML = `<div class="shop-grid">${
-    cats.map(cat => {
-      const items = cat.items.map(item => {
-        const checked = !!shopChecked[item.id];
-        const subHtml = item.reponer
-          ? `<div class="shop-item-sub reponer">reponer solo si se te acabó</div>`
-          : '';
-        return `<div class="shop-item">
-          <input type="checkbox" id="${item.id}" ${checked?'checked':''} onchange="toggleShop('${item.id}',this)">
-          <div class="shop-item-info">
-            <span class="shop-item-name${checked?' done':''}" onclick="document.getElementById('${item.id}').click()">${item.name}</span>
-            ${subHtml}
-          </div>
-          <div class="shop-item-right">
-            <span class="shop-qty">${item.qty}</span>
-            <span class="shop-price">${item.price.toFixed(2)}€</span>
-          </div>
-        </div>`;
-      }).join('');
-      return `<div class="shop-cat"><h3>${cat.cat}</h3>${items}</div>`;
-    }).join('')
-  }</div>`;
-}
-
-function selectShopWeek(w, el) {
-  currentShopWeek = w;
-  document.querySelectorAll('.shop-week-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  renderShop();
+  document.getElementById('shop-list').innerHTML = `
+    <div class="shop-block">
+      <div class="shop-block-title cada-semana">✅ Compra esto CADA SEMANA</div>
+      <div class="shop-block-desc">Estos productos los necesitas sí o sí todas las semanas. Son los frescos y los que se consumen enteros.</div>
+      ${buildShopGrid(SHOP_SEMANAL)}
+    </div>
+    <div class="shop-block">
+      <div class="shop-block-title reponer">🔄 Reponer solo cuando se acabe</div>
+      <div class="shop-block-desc">Estos duran varias semanas. Cómpralos la primera vez y luego solo cuando veas que se acaban.</div>
+      ${buildShopGrid(SHOP_REPONER)}
+    </div>`;
 }
 
 function toggleShop(id, cb) {
@@ -788,7 +749,7 @@ function toggleShop(id, cb) {
 }
 
 function checkAllShop() {
-  currentShopItems().forEach(item=>{
+  allShopItems().forEach(item=>{
     shopChecked[item.id]=true;
     const cb=document.getElementById(item.id);
     if(cb){cb.checked=true;cb.closest('.shop-item')?.querySelector('.shop-item-name')?.classList.add('done');}
@@ -796,7 +757,7 @@ function checkAllShop() {
   saveState();
 }
 function uncheckAllShop() {
-  currentShopItems().forEach(item=>{
+  allShopItems().forEach(item=>{
     shopChecked[item.id]=false;
     const cb=document.getElementById(item.id);
     if(cb){cb.checked=false;cb.closest('.shop-item')?.querySelector('.shop-item-name')?.classList.remove('done');}
