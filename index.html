@@ -136,6 +136,31 @@ h2{font-size:1.1rem;margin-bottom:18px}
 .rebote-step .rs-val{font-size:1.1rem;font-weight:700;color:var(--green)}
 .rebote-step .rs-lbl{font-size:0.73rem;color:var(--muted);margin-top:2px}
 
+/* RECETAS */
+.recipe-filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px}
+.recipe-filter{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:0.82rem;color:var(--muted);transition:all .15s}
+.recipe-filter:hover{border-color:var(--accent);color:var(--text)}
+.recipe-filter.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.recipe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.recipe-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .15s}
+.recipe-card:hover{border-color:var(--accent)}
+.recipe-card-header{padding:14px 16px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.recipe-emoji{font-size:2rem;line-height:1}
+.recipe-meta{flex:1}
+.recipe-name{font-weight:700;font-size:1rem;margin-bottom:3px}
+.recipe-badges{display:flex;gap:6px;flex-wrap:wrap}
+.recipe-time{background:#1a2a4a;color:var(--accent);font-size:0.72rem;font-weight:600;padding:2px 8px;border-radius:5px}
+.recipe-cat-badge{background:var(--card2);color:var(--muted);font-size:0.72rem;padding:2px 8px;border-radius:5px}
+.recipe-body{padding:14px 16px}
+.recipe-section{font-size:0.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px;margin-top:12px}
+.recipe-section:first-child{margin-top:0}
+.recipe-ings{list-style:none;display:flex;flex-direction:column;gap:3px}
+.recipe-ings li{font-size:0.84rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+.recipe-ings li::before{content:'·';color:var(--accent);font-weight:700}
+.recipe-steps{list-style:none;display:flex;flex-direction:column;gap:7px;counter-reset:steps}
+.recipe-steps li{font-size:0.84rem;color:var(--text);display:flex;gap:9px;align-items:flex-start;counter-increment:steps}
+.recipe-steps li::before{content:counter(steps);background:var(--accent);color:#fff;font-size:0.7rem;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.recipe-tip{background:var(--card2);border-left:3px solid var(--yellow);padding:8px 10px;border-radius:0 6px 6px 0;font-size:0.8rem;color:var(--muted);margin-top:10px}
 @media(max-width:600px){nav{padding:0 10px}nav button{padding:5px 9px;font-size:0.78rem}main{padding:14px 10px 60px}}
 </style>
 </head>
@@ -146,6 +171,7 @@ h2{font-size:1.1rem;margin-bottom:18px}
   <button class="active" onclick="showSection('semana',this)">📅 Semana</button>
   <button onclick="showSection('compra',this)">🛒 Compra</button>
   <button onclick="showSection('plan',this)">📈 Plan Mensual</button>
+  <button onclick="showSection('recetas',this)">👨‍🍳 Recetas</button>
   <button onclick="showSection('objetivos',this)">🎯 Objetivos</button>
 </nav>
 
@@ -219,6 +245,13 @@ h2{font-size:1.1rem;margin-bottom:18px}
     </ul>
   </div>
   <p style="font-size:0.75rem;color:var(--muted);margin-top:12px">* Precios orientativos Mercadona 2025. Items marcados con <em>"reponer si falta"</em> duran varias semanas.</p>
+</div>
+
+<!-- ====== RECETAS ====== -->
+<div id="recetas" class="section">
+  <h2>Recetas fáciles</h2>
+  <div class="recipe-filters" id="recipe-filters"></div>
+  <div class="recipe-grid" id="recipe-grid"></div>
 </div>
 
 <!-- ====== PLAN MENSUAL ====== -->
@@ -804,12 +837,259 @@ function showSection(id, btn) {
 }
 
 // ═══════════════════════════════════════════════
+// RECETAS
+// ═══════════════════════════════════════════════
+const RECIPES = [
+  // ── POLLO ──
+  { id:'r1', cat:'pollo', emoji:'🍗', name:'Pollo airfryer', time:'20 min',
+    ings:['250g pechuga entera','sal y pimienta','ajo en polvo','pimentón dulce','spray de aceite'],
+    steps:['Seca la pechuga con papel de cocina.',
+           'Echa sal, ajo en polvo y pimentón por los dos lados.',
+           'Pon un poco de spray de aceite en la cesta del airfryer.',
+           'Cocina a 180 °C durante 18 min. A los 10 min dale la vuelta.',
+           'Deja reposar 2 min antes de cortar.'],
+    tip:'Si la pechuga es muy gruesa, ábrela por la mitad como un libro antes de meterla.' },
+
+  { id:'r2', cat:'pollo', emoji:'🧄', name:'Pollo al ajillo', time:'15 min',
+    ings:['250g pechuga en dados','3–4 dientes de ajo laminados','perejil picado','sal','1 cda aceite oliva'],
+    steps:['Trocea la pechuga en dados de 3 cm.',
+           'Calienta el aceite a fuego medio-alto en una sartén.',
+           'Añade el ajo laminado, sofríe 1 min sin que se queme.',
+           'Echa los dados de pollo, sal y saltea 8–10 min removiendo.',
+           'Añade perejil picado al final y apaga.'],
+    tip:'Si el ajo se dora demasiado rápido, baja el fuego. Amargo = quemado.' },
+
+  { id:'r3', cat:'pollo', emoji:'🍋', name:'Pollo al limón y orégano', time:'15 min',
+    ings:['250g pechuga entera o en filetes','zumo de ½ limón','1 cdita orégano seco','sal','spray aceite'],
+    steps:['Mezcla el zumo de limón con orégano y sal en un plato.',
+           'Moja la pechuga en esa mezcla y deja 10 min marinando.',
+           'Pon spray en la sartén y calienta a fuego medio-alto.',
+           'Cocina la pechuga 5–6 min por cada lado.',
+           'Exprime unas gotas de limón encima antes de servir.'],
+    tip:'Cuanto más tiempo marine, más sabor. Puedes dejarlo en la nevera desde la noche anterior.' },
+
+  { id:'r4', cat:'pollo', emoji:'🍔', name:'Hamburguesa de pollo casera', time:'15 min',
+    ings:['250g pechuga picada (pídela en Mercadona)','sal','ajo en polvo','pimentón','spray aceite'],
+    steps:['Mezcla la pechuga picada con sal, ajo en polvo y pimentón.',
+           'Forma 2 hamburguesas del mismo grosor con las manos mojadas.',
+           'Pon spray en la sartén, calienta a fuego medio-alto.',
+           'Cocina 4 min por cada lado sin moverlas.',
+           'Sirve sobre ensalada o con patata airfryer.'],
+    tip:'No las aplastes con la espátula mientras se hacen, pierden jugos y quedan secas.' },
+
+  { id:'r5', cat:'pollo', emoji:'🥢', name:'Pollo en salsa de soja', time:'12 min',
+    ings:['250g pechuga en dados','1 cda salsa soja baja en sal','1 diente ajo picado','½ cdita jengibre molido','spray aceite'],
+    steps:['Mezcla soja, ajo y jengibre en un bol pequeño.',
+           'Pon spray en la sartén, calienta fuerte.',
+           'Saltea los dados de pollo 5 min a fuego alto removiendo.',
+           'Vierte la salsa de soja, baja a fuego medio.',
+           'Cocina 3 min más hasta que se reduzca y glasee el pollo.'],
+    tip:'La soja baja en sal de Mercadona (Hacendado) tiene menos sodio que la normal. Úsala siempre.' },
+
+  { id:'r6', cat:'pollo', emoji:'🌯', name:'Wrap de pollo', time:'10 min',
+    ings:['250g pechuga a la plancha en tiras','1 tortilla de trigo (opcional)','lechuga','tomate en rodajas','sal'],
+    steps:['Cocina la pechuga a la plancha con sal, 5 min por lado.',
+           'Corta en tiras finas.',
+           'Pon lechuga y tomate en el centro de la tortilla.',
+           'Añade las tiras de pollo.',
+           'Enrolla apretando los laterales hacia dentro.'],
+    tip:'Sin tortilla también vale: sirve las tiras sobre una cama de lechuga y tomate.' },
+
+  // ── PAVO ──
+  { id:'r7', cat:'pavo', emoji:'🦃', name:'Pavo a la plancha con especias', time:'10 min',
+    ings:['250g filetes de pavo','sal','ajo en polvo','cúrcuma o pimentón','spray aceite'],
+    steps:['Aplana los filetes con la mano si son gruesos.',
+           'Echa sal, ajo en polvo y cúrcuma por los dos lados.',
+           'Pon spray en la sartén bien caliente.',
+           'Cocina 3–4 min por cada lado.',
+           'Deja reposar 1 min antes de comer.'],
+    tip:'El pavo se seca fácil. No lo hagas más de 4 min por lado o quedará como cartón.' },
+
+  // ── PESCADO ──
+  { id:'r8', cat:'pescado', emoji:'🐟', name:'Merluza al horno', time:'20 min',
+    ings:['250g filetes de merluza','sal','ajo en polvo','perejil','zumo de limón','1 cda aceite oliva'],
+    steps:['Precalienta el horno a 200 °C.',
+           'Pon los filetes en una bandeja con papel de horno.',
+           'Echa sal, ajo en polvo, perejil y zumo de limón por encima.',
+           'Riega con el aceite.',
+           'Hornea 12–15 min hasta que la merluza esté opaca y se desmenuce.'],
+    tip:'Si viene congelada, descongela en la nevera la noche anterior. Nunca en caliente.' },
+
+  { id:'r9', cat:'pescado', emoji:'🐠', name:'Merluza a la plancha', time:'10 min',
+    ings:['250g filetes de merluza','sal','spray aceite','limón para servir'],
+    steps:['Seca bien los filetes con papel de cocina.',
+           'Pon spray en la sartén y calienta a fuego alto.',
+           'Echa los filetes con el lado de la piel arriba, sal encima.',
+           'Cocina 3 min sin mover. Dale la vuelta con cuidado.',
+           'Otros 2–3 min y listo. Exprime limón al servir.'],
+    tip:'La sartén tiene que estar bien caliente antes de echar el pescado, si no se pega.' },
+
+  { id:'r10', cat:'pescado', emoji:'🎣', name:'Pescado blanco al horno con verduras', time:'25 min',
+    ings:['250g merluza o bacalao','200g verduras congeladas','sal','ajo en polvo','aceite oliva','limón'],
+    steps:['Precalienta el horno a 200 °C.',
+           'Pon las verduras congeladas en la bandeja, sal y un chorrito de aceite.',
+           'Hornea las verduras 10 min solas.',
+           'Saca la bandeja, pon el pescado encima de las verduras.',
+           'Sazona el pescado y hornea todo junto 12 min más.'],
+    tip:'Todo en una sola bandeja = menos fregado. El jugo del pescado impregna las verduras.' },
+
+  // ── HUEVOS ──
+  { id:'r11', cat:'huevos', emoji:'🍳', name:'Tortilla de 4 huevos', time:'8 min',
+    ings:['4 huevos M','sal','spray aceite o ½ cdita aceite oliva'],
+    steps:['Bate los 4 huevos con sal en un bol hasta que estén homogéneos.',
+           'Pon el aceite en la sartén (20 cm) a fuego medio.',
+           'Cuando esté caliente, echa el huevo batido.',
+           'Con una espátula ve moviendo los bordes hacia el centro mientras se cuaja.',
+           'Cuando esté casi cuajada (30 seg), dobla por la mitad y sirve.'],
+    tip:'Para tortilla jugosa retírala cuando aún tiemble un poco en el centro.' },
+
+  { id:'r12', cat:'huevos', emoji:'🥚', name:'Revuelto de huevos con jamón cocido', time:'8 min',
+    ings:['4 huevos M','150g jamón cocido extra en tiras','sal','spray aceite'],
+    steps:['Bate los huevos con una pizca de sal.',
+           'Pon spray en la sartén a fuego medio.',
+           'Echa el jamón cocido en tiras, saltea 1 min.',
+           'Añade los huevos batidos.',
+           'Remueve con espátula suavemente hasta que cuaje a tu gusto.'],
+    tip:'Si quieres un revuelto cremoso, apaga el fuego antes de que esté completamente cuajado.' },
+
+  // ── CARNE ──
+  { id:'r13', cat:'carne', emoji:'🥩', name:'Carne picada magra a la sartén', time:'15 min',
+    ings:['250g carne picada vacuno 5%','sal','ajo en polvo','pimentón','tomate triturado (opcional)','spray aceite'],
+    steps:['Pon spray en la sartén a fuego medio-alto.',
+           'Echa la carne picada y desmenúzala bien con la espátula.',
+           'Añade sal, ajo en polvo y pimentón.',
+           'Cocina 8–10 min removiendo hasta que no quede rosa.',
+           'Opcional: añade 2 cdas de tomate triturado al final y cocina 2 min más.'],
+    tip:'La carne picada 5% tiene poca grasa, no necesita escurrir aceite. Sale solita.' },
+
+  // ── GUARNICIONES ──
+  { id:'r14', cat:'guarnicion', emoji:'🥔', name:'Patata crujiente airfryer', time:'25 min',
+    ings:['300g patatas','sal','pimentón o ajo en polvo','spray aceite'],
+    steps:['Corta las patatas en gajos o cubos del mismo tamaño.',
+           'Pon en un bol con sal, pimentón y spray de aceite. Mezcla bien.',
+           'Coloca en la cesta del airfryer sin amontonar.',
+           'Cocina a 200 °C durante 20–22 min.',
+           'A los 12 min abre y agita la cesta para que se hagan por todos lados.'],
+    tip:'Para que queden crujientes: sécalas bien antes de echarles el aceite.' },
+
+  { id:'r15', cat:'guarnicion', emoji:'🫕', name:'Patata cocida', time:'20 min',
+    ings:['300g patatas con piel','agua','sal'],
+    steps:['Lava bien las patatas sin pelar.',
+           'Ponlas en un cazo cubiertas de agua fría con sal.',
+           'Lleva a ebullición y cocina 15–18 min según el tamaño.',
+           'Comprueba con un cuchillo: si entra fácil, están listas.',
+           'Escurre, pela y sirve.'],
+    tip:'Cocer con piel conserva mejor los nutrientes y quedan más sabrosas.' },
+
+  { id:'r16', cat:'guarnicion', emoji:'🍚', name:'Arroz cocido perfecto', time:'15 min',
+    ings:['70g arroz crudo (→ 200g cocido)','agua (doble volumen)','sal'],
+    steps:['Mide el arroz (70g crudo = 200g cocido aproximado).',
+           'Pon el doble de agua que de arroz + sal a hervir.',
+           'Cuando hierva, echa el arroz y baja a fuego medio-bajo.',
+           'Tapa y cocina 12 min sin abrir la tapa.',
+           'Apaga, deja reposar 3 min tapado y suelta con un tenedor.'],
+    tip:'Prepara el arroz de 2–3 días a la vez y guárdalo en tupper en la nevera. Aguanta 4 días.' },
+
+  { id:'r17', cat:'guarnicion', emoji:'🥦', name:'Verduras salteadas', time:'8 min',
+    ings:['200g verduras congeladas mix','sal','ajo en polvo','spray aceite'],
+    steps:['Pon spray en la sartén a fuego fuerte.',
+           'Echa las verduras aún congeladas directamente.',
+           'Añade sal y ajo en polvo.',
+           'Saltea 6–8 min removiendo hasta que estén hechas y sin agua.',
+           'Sirve como acompañamiento.'],
+    tip:'Si las echas a la sartén bien caliente se saltean en vez de hervirse. Quedan mejor.' },
+
+  { id:'r18', cat:'guarnicion', emoji:'🥗', name:'Ensalada base', time:'5 min',
+    ings:['100–150g lechuga iceberg','1 tomate mediano','sal','vinagre (opcional)','spray aceite'],
+    steps:['Trocea la lechuga con las manos en trozos grandes.',
+           'Corta el tomate en gajos o dados.',
+           'Mezcla en un bol.',
+           'Echa sal, un chorrito de vinagre y spray de aceite.',
+           'Remueve y listo.'],
+    tip:'Prepara la lechuga ya cortada y guárdala en tupper con papel de cocina. Aguanta 3 días.' },
+
+  // ── DESAYUNOS ──
+  { id:'r19', cat:'desayuno', emoji:'🥣', name:'Queso fresco batido + avena + fruta', time:'3 min',
+    ings:['250g queso fresco batido 0%','60g copos de avena','fruta al gusto (plátano, fresas, naranja)'],
+    steps:['Echa el queso fresco en un bol.',
+           'Añade los copos de avena por encima.',
+           'Trocea la fruta y ponla encima.',
+           'Mezcla todo o déjalo en capas.',
+           'Listo para comer.'],
+    tip:'Si lo preparas la noche anterior la avena se hidrata y queda más cremoso (overnight oats).' },
+
+  { id:'r20', cat:'desayuno', emoji:'🥖', name:'Bocadillo de jamón serrano', time:'3 min',
+    ings:['100g pan integral de molde','100g jamón serrano','tomate triturado o natural','10g aceite oliva'],
+    steps:['Abre el pan y tuéstalo si quieres.',
+           'Unta tomate triturado en una o las dos rebanadas.',
+           'Pon el jamón serrano encima.',
+           'Echa el aceite de oliva por encima del jamón.',
+           'Cierra y come.'],
+    tip:'Con pan de molde integral de Mercadona ya tienes fibra. No hace falta nada más.' },
+];
+
+let currentRecipeCat = 'todas';
+
+function renderRecipes() {
+  const cats = [
+    { id:'todas', label:'Todas' },
+    { id:'pollo', label:'🍗 Pollo' },
+    { id:'pavo', label:'🦃 Pavo' },
+    { id:'pescado', label:'🐟 Pescado' },
+    { id:'huevos', label:'🥚 Huevos' },
+    { id:'carne', label:'🥩 Carne' },
+    { id:'guarnicion', label:'🥔 Guarniciones' },
+    { id:'desayuno', label:'🥣 Desayunos' },
+  ];
+
+  document.getElementById('recipe-filters').innerHTML = cats.map(c =>
+    `<div class="recipe-filter${c.id===currentRecipeCat?' active':''}" onclick="filterRecipes('${c.id}',this)">${c.label}</div>`
+  ).join('');
+
+  const filtered = currentRecipeCat === 'todas' ? RECIPES : RECIPES.filter(r => r.cat === currentRecipeCat);
+
+  document.getElementById('recipe-grid').innerHTML = filtered.map(r => {
+    const ings = r.ings.map(i => `<li>${i}</li>`).join('');
+    const steps = r.steps.map(s => `<li>${s}</li>`).join('');
+    const tip = r.tip ? `<div class="recipe-tip">💡 ${r.tip}</div>` : '';
+    return `<div class="recipe-card">
+      <div class="recipe-card-header">
+        <div class="recipe-emoji">${r.emoji}</div>
+        <div class="recipe-meta">
+          <div class="recipe-name">${r.name}</div>
+          <div class="recipe-badges">
+            <span class="recipe-time">⏱ ${r.time}</span>
+            <span class="recipe-cat-badge">${r.cat}</span>
+          </div>
+        </div>
+      </div>
+      <div class="recipe-body">
+        <div class="recipe-section">Ingredientes</div>
+        <ul class="recipe-ings">${ings}</ul>
+        <div class="recipe-section">Preparación</div>
+        <ol class="recipe-steps">${steps}</ol>
+        ${tip}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterRecipes(cat, el) {
+  currentRecipeCat = cat;
+  document.querySelectorAll('.recipe-filter').forEach(f => f.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('recipe-grid').innerHTML = '';
+  renderRecipes();
+}
+
+// ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
 loadState();
 renderWeek();
 renderShop();
 renderMonthPlan();
+renderRecipes();
 
 // auto-select today
 const dayMap = [6,0,1,2,3,4,5]; // 0=Sun→domingo=6, 1=Mon→lunes=0 ...
